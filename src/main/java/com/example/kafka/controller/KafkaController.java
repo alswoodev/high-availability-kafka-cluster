@@ -20,7 +20,13 @@ public class KafkaController {
     }
 
     @GetMapping
-    public void getMethodName(@RequestParam("message") String message) {
-        basicKafkaService.publish(message);
+    public void publish(@RequestParam("topic") String topic,@RequestParam("message") String message) {
+        basicKafkaService.publish(topic, message);
+    }
+
+    // The message should be provided in "key:value" format
+    @GetMapping("/stream")
+    public void streamPublish(@RequestParam("topic") String topic,@RequestParam("message") String message) {
+        basicKafkaService.publish(topic, message);
     }
 }
